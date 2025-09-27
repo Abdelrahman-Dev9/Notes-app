@@ -1,0 +1,14 @@
+import { Request, Response } from "express";
+import { NoteModel } from "../models/Note";
+
+export const deleteNote = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    await NoteModel.findByIdAndDelete(id);
+    res.status(200).json({ message: "note deleted successfully" });
+  } catch (error) {
+    res.status(500).json({
+      message: "something went wrong",
+    });
+  }
+};
